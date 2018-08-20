@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul,ol,li{
+            list-style: none;
+        }
+        img{
+            width: 150px;
+            height: 150px;
+            margin:5px 20px;
+        }
+        #food{
+            width: 600px;
+            height: 600px;
+            position: relative;
+        }
+        #food #close{
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: 200px;
+            top:200px;
+            display: none;
+        }
+        #food ul{
+
+        }
+        #food ul li{
+            width: 200px;
+            height: 200px;
+            float: left;
+            border: 2px solid rgba(0, 0, 0, 0.103);
+        }
+        #food ul li dl dd{
+            text-align: center;
+            height: 30px;
+            font:14px/30px "微软雅黑黑体"；
+        }
+        #food ul li.nine{
+            position: absolute;
+            top:200px;
+            left:200px;
+        }
+        #food ul li:nth-of-type(4){
+            position: absolute;
+            top:200px;
+            right:0px;
+        }
+        #food ul li:nth-of-type(5){
+            position: absolute;
+            top:400px;
+            right:0px;
+        }
+        #food ul li:nth-of-type(6){
+            position: absolute;
+            top:400px;
+            left:200px;
+        }
+        #food ul li:nth-of-type(7){
+            position: absolute;
+            top:400px;
+            left:0px;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>大奖等你们，点击看谁中奖！</h1>
+    <div id="food">
+        <div id="close"></div>
+        <ul>
+            <li>
+                <dl>
+                    <dt><img src="images/1.jpg" alt=""></dt>
+                    <dd>一号女人</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><img src="images/2.jpg" alt=""></dt>
+                    <dd>二号女人</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><img src="images/3.jpg" alt=""></dt>
+                    <dd>三号男人</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><img src="images/4.jpg" alt=""></dt>
+                    <dd>四号女人</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><img src="images/5.jpg" alt=""></dt>
+                    <dd>五号男人</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><img src="images/6.jpg" alt=""></dt>
+                    <dd>六号女人</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><img src="images/7.jpg" alt=""></dt>
+                    <dd>七号男人女人</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><img src="images/8.jpg" alt=""></dt>
+                    <dd>八号女人</dd>
+                </dl>
+            </li>
+            <li class="nine">
+                <dl>
+                    <dt id="btn"><img src="images/9.jpg" alt="" id="pic"></dt>
+                    <dd>点击抽人</dd>
+                </dl>
+            </li>
+            
+        </ul>
+    </div>
+
+    <script>
+        //初始化变量：
+        var oLi=document.getElementsByTagName("li"),
+            oBtn=document.getElementById("btn"),
+            oPic=document.getElementById("pic");
+        //num:计数器（顺时针）
+        //i;已完成的循环次数
+        //t:顺时针循环中每个li标签的下标
+        var num=i=t=0;  
+        oBtn.onclick=function(){
+            oPic.style.transform="scale(0.7)";
+            oPic.style.transition="1s all";
+            view();//动画视图（view）
+            
+        }
+        function view(){
+            num=parseInt(Math.random()*10)+20;//确定顺时针循环次数
+            console.log("固定："+i);
+
+            //一、确定循环次数（递归次数）
+            if(i<num){//i;已完成的Li循环个数 （变化）  
+                i++; //每循环完一个Li标签+1
+                setTimeout(view,200);
+                console.log("动态："+i);
+            }else{
+                i=0;
+                oPic.style.transform="scale(1)";
+                oPic.style.transition="1s all";
+            }
+
+            //二、动画
+            if(t<oLi.length-1){//t:顺时针循环中每个li标签的下标
+            //先清空样式再设置
+                for(var j=0;j<oLi.length-1;j++){
+                    oLi[j].style.background="#fff";
+                    oLi[j].style.border="2px solid #000";
+
+                }
+                oLi[t].style.background="rgba(255,0,0,0.5)";
+                oLi[t].style.border="2px solid #f00";
+                t++;
+            }else{
+                t=0;
+            }
+        }
+    </script>
+</body>
+</html>
